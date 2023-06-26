@@ -1,4 +1,5 @@
 
+import app.view.login.LoginForm;
 import config.Config;
 import config.DatabaseConfig;
 import java.sql.SQLException;
@@ -21,5 +22,6 @@ public class Main {
         DatabaseConfig databaseConfig = config.getDatabase();
         SQLStorage sqlStorage = new SQLStorage(databaseConfig.getMysqlDriverUrl(), databaseConfig.getUsername(), databaseConfig.getPassword());
         sqlStorage.getConnection();
+        new LoginForm().setVisible(true);
     }
 }
