@@ -14,39 +14,39 @@ import storage.SQLStorage;
  * @author Administrator
  * @param <T>
  */
-public abstract class AbstractModel<T> {
+public abstract class DataAccessModel<T> {
 
     protected SQLStorage sqlStorage;
 
-    public AbstractModel(SQLStorage sqlStorage) {
+    public DataAccessModel(SQLStorage sqlStorage) {
         this.sqlStorage = sqlStorage;
     }
 
-    protected SQLExecuteResult<Boolean> Create(T data) {
+    protected SQLExecuteResult<Boolean> create(T data) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<Boolean> Update(T data) {
+    protected SQLExecuteResult<Boolean> update(T data) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<Boolean> DeleteByINTID(int id) {
+    protected SQLExecuteResult<Boolean> deleteByIntId(int id) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<Boolean> DeleteByUUID(UUID id) {
+    protected SQLExecuteResult<Boolean> deleteByUuid(UUID id) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<T> FindByUUID(UUID id) {
+    protected SQLExecuteResult<T> findByUuid(UUID id) {
         return new SQLExecuteResult();
     }
     
-    protected SQLExecuteResult<T> FindByINTID(int id) {
+    protected SQLExecuteResult<T> findByIntId(int id) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<ArrayList<T>> FindByALL() {
+    protected SQLExecuteResult<ArrayList<T>> findALL() {
         return new SQLExecuteResult();
     }
 }

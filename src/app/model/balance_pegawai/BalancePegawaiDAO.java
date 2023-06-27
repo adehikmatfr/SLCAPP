@@ -4,7 +4,7 @@
  */
 package app.model.balance_pegawai;
 
-import app.model.AbstractModel;
+import app.model.DataAccessModel;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -14,34 +14,34 @@ import storage.SQLStorage;
  *
  * @author Administrator
  */
-public class BalancePegawaiDAO extends AbstractModel<BalancePegawaiModel> implements BalancePegawai {
+public class BalancePegawaiDAO extends DataAccessModel<BalancePegawaiModel> implements BalancePegawai {
     public BalancePegawaiDAO(SQLStorage sqlStorage) {
         super(sqlStorage);
     }
     
     @Override
-    protected SQLExecuteResult FindByALL() {
-        return super.FindByALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findALL() {
+        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult FindByUUID(UUID id) {
-        return super.FindByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findByUuid(UUID id) {
+        return super.findByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult DeleteByUUID(UUID id) {
-        return super.DeleteByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult deleteByUuid(UUID id) {
+        return super.deleteByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult Update(BalancePegawaiModel data) {
-        return super.Update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult update(BalancePegawaiModel data) {
+        return super.update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult Create(BalancePegawaiModel data) {
-        return super.Create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult create(BalancePegawaiModel data) {
+        return super.create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

@@ -12,11 +12,7 @@ import storage.SQLExecuteResult;
  */
 public interface Admin {
 
-    public SQLExecuteResult<Boolean> CreateAdmin(AdminModel model);
+    public SQLExecuteResult<AdminModel> findAdminById(int id);
 
-    public SQLExecuteResult<Boolean> UpdateAdmin(AdminModel model);
-
-    public SQLExecuteResult<AdminModel> FindAdminById(int id);
-
-    public SQLExecuteResult<AdminModel> VerifyLogin(String username, String password);
+    public SQLExecuteResult<AdminModel> findAdminByUsername(String username);
 }

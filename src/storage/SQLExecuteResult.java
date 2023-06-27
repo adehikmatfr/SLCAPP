@@ -10,7 +10,6 @@ package storage;
  * @param <T>
  */
 public class SQLExecuteResult<T> {
-
     private final boolean success;
     public T result;
     private String errorMessage;

@@ -4,10 +4,15 @@
  */
 package app.controller.admin;
 
+import app.model.ServiceResult;
+import app.model.admin.AdminModel;
+
 /**
  *
  * @author Administrator
  */
 public interface Admin {
-    
+    public ServiceResult<AdminModel> FindAdminById(int id);
+
+    public ServiceResult<AdminModel> VerifyLogin(String username, String password);
 }

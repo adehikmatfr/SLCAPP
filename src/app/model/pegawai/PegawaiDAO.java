@@ -4,7 +4,7 @@
  */
 package app.model.pegawai;
 
-import app.model.AbstractModel;
+import app.model.DataAccessModel;
 import app.model.balance_pegawai.BalancePegawaiModel;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -15,35 +15,35 @@ import storage.SQLStorage;
  *
  * @author Administrator
  */
-public class PegawaiDAO extends AbstractModel implements Pegawai{
+public class PegawaiDAO extends DataAccessModel implements Pegawai{
     
     public PegawaiDAO(SQLStorage sqlStorage) {
         super(sqlStorage);
     }
 
     @Override
-    protected SQLExecuteResult FindByALL() {
-        return super.FindByALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findALL() {
+        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult FindByUUID(UUID id) {
-        return super.FindByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findByUuid(UUID id) {
+        return super.findByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult DeleteByUUID(UUID id) {
-        return super.DeleteByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult deleteByUuid(UUID id) {
+        return super.deleteByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult Update(Object data) {
-        return super.Update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult update(Object data) {
+        return super.update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult Create(Object data) {
-        return super.Create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult create(Object data) {
+        return super.create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

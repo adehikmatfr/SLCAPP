@@ -6,6 +6,7 @@ package storage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -13,7 +14,8 @@ import java.sql.SQLException;
  * @author Administrator
  */
 public class SQLStorage {
-     public SQLStorage(String url, String username, String password) {
+
+    public SQLStorage(String url, String username, String password) {
         this.url = url;
         this.username = username;
         this.password = password;
@@ -23,6 +25,7 @@ public class SQLStorage {
     private final String username;
     private final String password;
     private Connection connection;
+    private PreparedStatement statement;
 
     @SuppressWarnings("CallToPrintStackTrace")
     public Connection getConnection() throws SQLException {
@@ -34,17 +37,5 @@ public class SQLStorage {
         }
 
         return connection;
-    }
-
-    @SuppressWarnings("CallToPrintStackTrace")
-    public void close() throws SQLException {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
     }
 }

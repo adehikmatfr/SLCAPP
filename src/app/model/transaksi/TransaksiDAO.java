@@ -4,7 +4,7 @@
  */
 package app.model.transaksi;
 
-import app.model.AbstractModel;
+import app.model.DataAccessModel;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -14,35 +14,35 @@ import storage.SQLStorage;
  *
  * @author Administrator
  */
-public class TransaksiDAO extends AbstractModel<TransaksiModel> implements Transaksi {
+public class TransaksiDAO extends DataAccessModel<TransaksiModel> implements Transaksi {
     
     public TransaksiDAO(SQLStorage sqlStorage) {
         super(sqlStorage);
     }
 
     @Override
-    protected SQLExecuteResult<ArrayList<TransaksiModel>> FindByALL() {
-        return super.FindByALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<ArrayList<TransaksiModel>> findALL() {
+        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult<TransaksiModel> FindByUUID(UUID id) {
-        return super.FindByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<TransaksiModel> findByUuid(UUID id) {
+        return super.findByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult<Boolean> DeleteByUUID(UUID id) {
-        return super.DeleteByUUID(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<Boolean> deleteByUuid(UUID id) {
+        return super.deleteByUuid(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult<Boolean> Update(TransaksiModel data) {
-        return super.Update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<Boolean> update(TransaksiModel data) {
+        return super.update(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    protected SQLExecuteResult<Boolean> Create(TransaksiModel data) {
-        return super.Create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<Boolean> create(TransaksiModel data) {
+        return super.create(data); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
     @Override
