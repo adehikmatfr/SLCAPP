@@ -31,15 +31,22 @@ public class AdminDAO extends DataAccessModel<AdminModel> implements Admin {
 
         try {
             connection = this.sqlStorage.getConnection();
+            
             statement = connection.prepareStatement("SELECT * FROM admin WHERE id = ?");
             statement.setInt(1, id);
+            
             resultSet = statement.executeQuery();
+            
             while (resultSet.next()) {
                 adminModel.setId(resultSet.getInt("id"));
                 adminModel.setUsername(resultSet.getString("username"));
             }
+            
             resultSet.close();
             statement.close();
+            
+            if (adminModel.getId() <= 0) throw new  SQLException("Username not found");
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
             return new SQLExecuteResult(false, ex.getMessage());
@@ -69,16 +76,23 @@ public class AdminDAO extends DataAccessModel<AdminModel> implements Admin {
 
         try {
             connection = this.sqlStorage.getConnection();
+            
             statement = connection.prepareStatement("SELECT * FROM admin WHERE username = ?");
             statement.setString(1, username);
+            
             resultSet = statement.executeQuery();
+                
             while (resultSet.next()) {
                 adminModel.setId(resultSet.getInt("id"));
                 adminModel.setUsername(resultSet.getString("username"));
                 adminModel.setPassword(resultSet.getString("password"));
             }
+            
             resultSet.close();
             statement.close();
+            
+            if (adminModel.getId() <= 0) throw new SQLException("Username not found");
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new Exception(ex.toString());

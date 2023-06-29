@@ -5,7 +5,11 @@
 package app.controller.admin;
 
 import app.model.ServiceResult;
+import app.model.admin.AdminDAO;
 import app.model.admin.AdminModel;
+import storage.SQLExecuteResult;
+import storage.SQLStorage;
+import util.Encoder;
 
 /**
  *
@@ -13,18 +17,33 @@ import app.model.admin.AdminModel;
  */
 public class AdminController implements Admin {
 
-    public AdminController() {
+    public AdminController(SQLStorage sqlStorage) {
+        this.adminDataAccessObject = new AdminDAO(sqlStorage);
     }
+
+    private final app.model.admin.Admin adminDataAccessObject;
 
     @Override
     public ServiceResult<AdminModel> FindAdminById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ServiceResult(this.adminDataAccessObject.findAdminById(id));
     }
 
     @Override
     public ServiceResult<AdminModel> VerifyLogin(String username, String password) {
-//        veryfy password here
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SQLExecuteResult<AdminModel> sqlExecuteResult = this.adminDataAccessObject.findAdminByUsername(username);
+
+        if (!sqlExecuteResult.isSuccess()) {
+            return new ServiceResult(sqlExecuteResult);
+        }
+
+        AdminModel adminModel = sqlExecuteResult.getResult();
+        if (!Encoder.verifyPassword(password, adminModel.getPassword())) {
+            ServiceResult serviceResult = new ServiceResult();
+            serviceResult.addError("Wrong Password!");
+            return serviceResult;
+        }
+
+        return new ServiceResult(sqlExecuteResult);
     }
 
 }

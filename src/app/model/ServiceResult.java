@@ -5,6 +5,7 @@
 package app.model;
 
 import java.util.ArrayList;
+import storage.SQLExecuteResult;
 
 /**
  *
@@ -14,14 +15,19 @@ import java.util.ArrayList;
 public class ServiceResult<T> {
 
     private boolean success;
-    public T singleResult;
-    public ArrayList<T> groupResult;
-    private ArrayList<String> errors;
+    private T result;
+    private final ArrayList<String> errors = new ArrayList<>();
 
     public ServiceResult() {
         this.success = false;
     }
 
+    public ServiceResult(SQLExecuteResult<T> sqlExecuteResult) {
+        this.success = sqlExecuteResult.isSuccess();
+        this.errors.add(sqlExecuteResult.getErrorMessage());
+        this.result = sqlExecuteResult.getResult();
+    }
+    
     public boolean isSuccess() {
         return success;
     }
@@ -30,23 +36,19 @@ public class ServiceResult<T> {
         this.success = true;
     }
 
-    public T getSingleResult() {
-        return singleResult;
+    public T getResult() {
+        return result;
     }
 
-    public void setSingleResult(T result) {
-        this.singleResult = result;
+    public void setResult(T result) {
+        this.result = result;
     }
 
-    public ArrayList<T> getGroupResult() {
-        return groupResult;
-    }
-
-    public void setGroupResult(ArrayList<T> result) {
-        this.groupResult = result;
-    }
-
-    public String errorDetail() {
+    public String getErrorDetail() {
         return String.join(",", this.errors);
+    }
+    
+    public void addError(String err){
+        this.errors.add(err);
     }
 }
