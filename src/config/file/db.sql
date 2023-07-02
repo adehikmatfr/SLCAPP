@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS admin (
     id int primary key auto_increment,
     username varchar(50) not null,
-    password varchar(50) not null
+    password varchar(255) not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS pegawai (

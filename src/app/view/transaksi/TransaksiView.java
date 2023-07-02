@@ -4,16 +4,29 @@
  */
 package app.view.transaksi;
 
+import app.model.admin.AdminModel;
+import app.view.home.HomeView;
+import storage.SQLStorage;
+
 /**
  *
  * @author fataw
  */
 public class TransaksiView extends javax.swing.JFrame {
 
+    private SQLStorage sqlStorage;
+    private AdminModel adminModel;
+    
     /**
      * Creates new form TransaksiForm
      */
     public TransaksiView() {
+        initComponents();
+    }
+    
+    public TransaksiView(HomeView homeView) {
+        this.adminModel = homeView.getAdminModel();
+        this.sqlStorage = homeView.getSqlStorage();
         initComponents();
     }
 
@@ -47,6 +60,11 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("BACK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -204,6 +222,13 @@ public class TransaksiView extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        HomeView homeView = new HomeView(this.sqlStorage, this.adminModel);
+        this.setVisible(false);
+        homeView.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

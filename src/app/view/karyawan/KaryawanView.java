@@ -4,17 +4,63 @@
  */
 package app.view.karyawan;
 
+import app.controller.pegawai.Pegawai;
+import app.controller.pegawai.PegawaiController;
+import app.model.ServiceResult;
+import app.model.admin.AdminModel;
+import app.model.pegawai.PegawaiModel;
+import app.view.home.HomeView;
+import java.util.UUID;
+import javax.swing.JOptionPane;
+import storage.SQLStorage;
+
 /**
  *
  * @author fataw
  */
 public class KaryawanView extends javax.swing.JFrame {
 
+    private SQLStorage sqlStorage;
+    private AdminModel adminModel;
+    private Pegawai pegawaiController;
+
     /**
      * Creates new form KaryawanForm
      */
     public KaryawanView() {
         initComponents();
+    }
+
+    public KaryawanView(HomeView homeView) {
+        this.pegawaiController = new PegawaiController(homeView.getSqlStorage());
+        this.adminModel = homeView.getAdminModel();
+        this.sqlStorage = homeView.getSqlStorage();
+        initComponents();
+        preSetup();
+    }
+
+    private void preSetup() {
+        this.nip.setEnabled(false);
+        setInitData();
+    }
+
+    private void setInitData() {
+        this.nip.setText(UUID.randomUUID().toString());
+        this.nama.setText("");
+    }
+
+    private boolean validateInput() {
+        if ("".equals(this.nip.getText())) {
+            JOptionPane.showMessageDialog(null, "nip is not empty", "Error Create Pegawai", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if ("".equals(this.nama.getText())) {
+            JOptionPane.showMessageDialog(null, "nama is not empty", "Error Create Pegawai", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -30,8 +76,8 @@ public class KaryawanView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        nip = new javax.swing.JTextField();
+        nama = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -45,6 +91,11 @@ public class KaryawanView extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("BACK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("MENU KARYAWAN");
 
@@ -52,14 +103,19 @@ public class KaryawanView extends javax.swing.JFrame {
 
         jLabel3.setText("Nama");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        nip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nipActionPerformed(evt);
             }
         });
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setText("Create");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setText("Update");
@@ -103,8 +159,8 @@ public class KaryawanView extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(nip, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,11 +201,11 @@ public class KaryawanView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -168,9 +224,35 @@ public class KaryawanView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nipActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        HomeView homeView = new HomeView(this.sqlStorage, this.adminModel);
+        this.setVisible(false);
+        homeView.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        if (this.validateInput()) {
+            PegawaiModel pegawaiModel = new PegawaiModel();
+            pegawaiModel.setNama(this.nama.getText());
+            pegawaiModel.setNip(UUID.fromString(this.nip.getText()));
+            ServiceResult<Boolean> serviceResult = this.pegawaiController.CreatePegawai(pegawaiModel);
+
+            if (!serviceResult.isSuccess()) {
+                JOptionPane.showMessageDialog(null, serviceResult.getErrorDetail(), "Error Create Pegawai", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "Success Create Pegawai nip : " + this.nip.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            setInitData();
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -220,8 +302,8 @@ public class KaryawanView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nama;
+    private javax.swing.JTextField nip;
     // End of variables declaration//GEN-END:variables
 }

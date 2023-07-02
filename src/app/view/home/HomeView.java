@@ -37,6 +37,14 @@ public class HomeView extends javax.swing.JFrame {
         this.username.setText(adminModel.getUsername().toUpperCase());
     }
 
+    public SQLStorage getSqlStorage() {
+        return sqlStorage;
+    }
+
+    public AdminModel getAdminModel() {
+        return adminModel;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,14 +156,14 @@ public class HomeView extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        KaryawanView karyawanView = new KaryawanView();
+        KaryawanView karyawanView = new KaryawanView(this);
         this.setVisible(false);
         karyawanView.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        TransaksiView transaksiView = new TransaksiView();
+        TransaksiView transaksiView = new TransaksiView(this);
         this.setVisible(false);
         transaksiView.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked

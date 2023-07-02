@@ -4,7 +4,7 @@
  */
 package app.model.pegawai;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
