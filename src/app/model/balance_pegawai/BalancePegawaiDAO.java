@@ -5,6 +5,7 @@
 package app.model.balance_pegawai;
 
 import app.model.DataAccessModel;
+import app.model.base.FilterQuery;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -20,8 +21,8 @@ public class BalancePegawaiDAO extends DataAccessModel<BalancePegawaiModel> impl
     }
     
     @Override
-    protected SQLExecuteResult findALL() {
-        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findALL(FilterQuery filterQuery) {
+        return super.findALL(filterQuery); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

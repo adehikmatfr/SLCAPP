@@ -5,6 +5,7 @@
 package app.model.transaksi;
 
 import app.model.DataAccessModel;
+import app.model.base.FilterQuery;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -21,8 +22,8 @@ public class TransaksiDAO extends DataAccessModel<TransaksiModel> implements Tra
     }
 
     @Override
-    protected SQLExecuteResult<ArrayList<TransaksiModel>> findALL() {
-        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult<ArrayList<TransaksiModel>> findALL(FilterQuery filterQuery) {
+        return super.findALL(filterQuery); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

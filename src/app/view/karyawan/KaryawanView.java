@@ -103,12 +103,6 @@ public class KaryawanView extends javax.swing.JFrame {
 
         jLabel3.setText("Nama");
 
-        nip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nipActionPerformed(evt);
-            }
-        });
-
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setText("Create");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,10 +217,6 @@ public class KaryawanView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nipActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:

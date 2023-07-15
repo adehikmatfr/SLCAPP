@@ -5,6 +5,7 @@
 package app.model.pegawai;
 
 import app.model.DataAccessModel;
+import app.model.base.FilterQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,8 +27,39 @@ public class PegawaiDAO extends DataAccessModel<PegawaiModel> implements Pegawai
     }
 
     @Override
-    protected SQLExecuteResult findALL() {
-        return super.findALL(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    protected SQLExecuteResult findALL(FilterQuery filterQuery) {
+         Connection connection = null;
+
+        try {
+            byte[] uuid = Uuid.toBytes(data.getNip());
+            PreparedStatement statement;
+
+            connection = this.sqlStorage.getConnection();
+
+            statement = connection.prepareStatement("SELECT nip, nama, ");
+            statement.setBytes(1,  uuid);
+            statement.setString(2, data.getNama());
+            statement.setTimestamp(3, createdAt);
+
+            System.out.println("SQL Query: " + statement.toString());
+            
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return new SQLExecuteResult(false, ex.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return new SQLExecuteResult(true, true);
     }
 
     @Override

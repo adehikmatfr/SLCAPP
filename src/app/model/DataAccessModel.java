@@ -4,6 +4,7 @@
  */
 package app.model;
 
+import app.model.base.FilterQuery;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -41,12 +42,12 @@ public abstract class DataAccessModel<T> {
     protected SQLExecuteResult<T> findByUuid(UUID id) {
         return new SQLExecuteResult();
     }
-    
+
     protected SQLExecuteResult<T> findByIntId(int id) {
         return new SQLExecuteResult();
     }
 
-    protected SQLExecuteResult<ArrayList<T>> findALL() {
+    protected SQLExecuteResult<ArrayList<T>> findALL(FilterQuery filterQuery) {
         return new SQLExecuteResult();
     }
 }
