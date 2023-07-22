@@ -3,4 +3,4 @@ database:
   port: 3306
   username: root
   password: 
-  db: alpro_koperasi
+  db: alpro_koprasi2

@@ -6,7 +6,6 @@ package app.model.pegawai;
 
 import app.model.base.FilterQuery;
 import java.util.ArrayList;
-import java.util.UUID;
 import storage.SQLExecuteResult;
 
 /**

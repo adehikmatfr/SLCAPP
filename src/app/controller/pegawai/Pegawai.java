@@ -5,13 +5,21 @@
 package app.controller.pegawai;
 
 import app.model.ServiceResult;
+import app.model.base.FilterQuery;
 import app.model.pegawai.PegawaiModel;
+import java.util.ArrayList;
 
 /**
  *
  * @author Administrator
  */
 public interface Pegawai {
-     public ServiceResult<Boolean> CreatePegawai(PegawaiModel pegawaiModel);
-     public ServiceResult<Boolean> UpdatePegawai(PegawaiModel pegawaiModel);
+
+    public ServiceResult<Boolean> CreatePegawai(PegawaiModel pegawaiModel);
+
+    public ServiceResult<Boolean> UpdatePegawai(PegawaiModel pegawaiModel);
+
+    public ServiceResult<Boolean> DeletePegawai(PegawaiModel pegawaiModel);
+
+    public ServiceResult<ArrayList<PegawaiModel>> FindPewagaiAll(FilterQuery filterQuery);
 }

@@ -8,10 +8,14 @@ import app.controller.pegawai.Pegawai;
 import app.controller.pegawai.PegawaiController;
 import app.model.ServiceResult;
 import app.model.admin.AdminModel;
+import app.model.base.FilterQuery;
 import app.model.pegawai.PegawaiModel;
 import app.view.home.HomeView;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 import storage.SQLStorage;
 
 /**
@@ -42,11 +46,55 @@ public class KaryawanView extends javax.swing.JFrame {
     private void preSetup() {
         this.nip.setEnabled(false);
         setInitData();
+        buttonCreateEnabled();
+    }
+
+    private void buttonCreateEnabled() {
+        this.jButton2.setEnabled(true);
+        this.jButton3.setEnabled(false);
+        this.jButton4.setEnabled(false);
+    }
+
+    public void viewData(String keyword) {
+        DefaultTableModel tabel1 = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Disable cell editing for all cells
+                return false;
+            }
+        };
+
+        tabel1.addColumn("NIP");
+        tabel1.addColumn("Nama");
+        tabel1.addColumn("Jumlah Tabungan");
+
+        FilterQuery filterQuery = new FilterQuery();
+        filterQuery.setKeyword(keyword);
+        filterQuery.setTake(1000);
+        filterQuery.setSkip(0);
+
+        ServiceResult<ArrayList<PegawaiModel>> data = this.pegawaiController.FindPewagaiAll(filterQuery);
+
+        if (data.isSuccess()) {
+            for (PegawaiModel pegawai : data.getResult()) {
+                tabel1.addRow(new Object[]{
+                    pegawai.getNip(),
+                    pegawai.getNama(),
+                    pegawai.getTotalBalance(),});
+            }
+        }
+
+        this.jTable1.setModel(tabel1);
+    }
+
+    private void clearDataInput() {
+        this.nip.setText(UUID.randomUUID().toString());
+        this.nama.setText("");
     }
 
     private void setInitData() {
-        this.nip.setText(UUID.randomUUID().toString());
-        this.nama.setText("");
+        clearDataInput();
+        viewData("");
     }
 
     private boolean validateInput() {
@@ -82,8 +130,8 @@ public class KaryawanView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        search = new javax.swing.JTextField();
+        btnsearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -126,12 +174,27 @@ public class KaryawanView extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setText("Delete");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setText("Reset");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(153, 153, 153));
-        jButton6.setText("Cari");
+        btnsearch.setBackground(new java.awt.Color(153, 153, 153));
+        btnsearch.setText("Cari");
+        btnsearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsearchMouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,9 +230,9 @@ public class KaryawanView extends javax.swing.JFrame {
                             .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6))
+                        .addComponent(btnsearch))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -218,8 +281,8 @@ public class KaryawanView extends javax.swing.JFrame {
                     .addComponent(jButton5))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnsearch))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -277,6 +340,21 @@ public class KaryawanView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsearchMouseClicked
+        // TODO add your handling code here:
+        this.viewData(this.search.getText());
+    }//GEN-LAST:event_btnsearchMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        clearDataInput();
+    }//GEN-LAST:event_jButton5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -314,19 +392,19 @@ public class KaryawanView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnsearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField nama;
     private javax.swing.JTextField nip;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }
