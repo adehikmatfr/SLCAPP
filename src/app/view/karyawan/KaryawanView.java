@@ -125,16 +125,16 @@ public class KaryawanView extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "NIP", "Nama", "Jumlah Tabungan", "Jumlah Pinjaman", "Jumlah"
+                "NIP", "Nama", "Jumlah Tabungan"
             }
         ));
         jTable1.setShowGrid(true);

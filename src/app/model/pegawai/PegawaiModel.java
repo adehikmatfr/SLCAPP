@@ -21,6 +21,7 @@ public class PegawaiModel {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;
+    private Integer totalBalance;
 
     public UUID getNip() {
         return nip;
@@ -61,4 +62,13 @@ public class PegawaiModel {
     public void setDeletedAt(Timestamp deletedAt) {
         this.deletedAt = deletedAt;
     }
+
+    public Integer getTotalBalance() {
+        return totalBalance;
+    }
+
+    public void setTotalBalance(Integer totalBalance) {
+        this.totalBalance = totalBalance;
+    }
+
 }

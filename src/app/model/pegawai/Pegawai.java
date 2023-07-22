@@ -4,6 +4,7 @@
  */
 package app.model.pegawai;
 
+import app.model.base.FilterQuery;
 import java.util.ArrayList;
 import java.util.UUID;
 import storage.SQLExecuteResult;
@@ -13,13 +14,12 @@ import storage.SQLExecuteResult;
  * @author Administrator
  */
 public interface Pegawai {
+
     public SQLExecuteResult<Boolean> CreatePegawai(PegawaiModel model);
 
     public SQLExecuteResult<Boolean> UpdatePegawai(PegawaiModel model);
-    
+
     public SQLExecuteResult<Boolean> DeletePegawai(PegawaiModel model);
 
-    public SQLExecuteResult<PegawaiModel> FindPewagaiById(UUID id);
-
-    public SQLExecuteResult<ArrayList<PegawaiModel>> FindPewagaiAll();
+    public SQLExecuteResult<ArrayList<PegawaiModel>> FindPewagaiAll(FilterQuery filterQuery);
 }
