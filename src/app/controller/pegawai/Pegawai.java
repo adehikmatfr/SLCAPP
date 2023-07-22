@@ -13,4 +13,5 @@ import app.model.pegawai.PegawaiModel;
  */
 public interface Pegawai {
      public ServiceResult<Boolean> CreatePegawai(PegawaiModel pegawaiModel);
+     public ServiceResult<Boolean> UpdatePegawai(PegawaiModel pegawaiModel);
 }

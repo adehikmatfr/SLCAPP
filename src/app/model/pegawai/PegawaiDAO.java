@@ -15,7 +15,6 @@ import java.util.UUID;
 import storage.SQLExecuteResult;
 import storage.SQLStorage;
 import java.sql.Timestamp;
-import util.Uuid;
 
 /**
  *
@@ -54,7 +53,7 @@ public class PegawaiDAO extends DataAccessModel<PegawaiModel> implements Pegawai
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 PegawaiModel model = new PegawaiModel();
-                UUID uuid = (UUID) resultSet.getObject("nip");
+                String uuid = resultSet.getString("nip");
                 model.setNip(uuid);
                 model.setNama(resultSet.getString("nama"));
                 model.setTotalBalance(resultSet.getInt("total_balance"));
@@ -80,7 +79,7 @@ public class PegawaiDAO extends DataAccessModel<PegawaiModel> implements Pegawai
     }
 
     @Override
-    protected SQLExecuteResult<Boolean> deleteByUuid(UUID id) {
+    protected SQLExecuteResult<Boolean> deleteByUuidString(String id) {
         Connection connection = null;
         Timestamp updateddAt = new Timestamp(System.currentTimeMillis());  // Current timestamp
 
@@ -155,13 +154,12 @@ public class PegawaiDAO extends DataAccessModel<PegawaiModel> implements Pegawai
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());  // Current timestamp
 
         try {
-            byte[] uuid = Uuid.toBytes(data.getNip());
             PreparedStatement statement;
 
             connection = this.sqlStorage.getConnection();
 
             statement = connection.prepareStatement("INSERT INTO pegawai (`nip`, `nama`, `created_at`) VALUES (?,?,?)");
-            statement.setObject(1, uuid);
+            statement.setObject(1, data.getNip());
             statement.setString(2, data.getNama());
             statement.setTimestamp(3, createdAt);
 
@@ -198,7 +196,7 @@ public class PegawaiDAO extends DataAccessModel<PegawaiModel> implements Pegawai
 
     @Override
     public SQLExecuteResult<Boolean> DeletePegawai(PegawaiModel model) {
-        return this.deleteByUuid(model.getNip());
+        return this.deleteByUuidString(model.getNip());
     }
 
     @Override

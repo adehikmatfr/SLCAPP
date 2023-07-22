@@ -110,9 +110,19 @@ public class KaryawanView extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setText("Update");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setText("Delete");
@@ -230,7 +240,7 @@ public class KaryawanView extends javax.swing.JFrame {
         if (this.validateInput()) {
             PegawaiModel pegawaiModel = new PegawaiModel();
             pegawaiModel.setNama(this.nama.getText());
-            pegawaiModel.setNip(UUID.fromString(this.nip.getText()));
+            pegawaiModel.setNip(this.nip.getText());
             ServiceResult<Boolean> serviceResult = this.pegawaiController.CreatePegawai(pegawaiModel);
 
             if (!serviceResult.isSuccess()) {
@@ -243,6 +253,29 @@ public class KaryawanView extends javax.swing.JFrame {
             setInitData();
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (this.validateInput()) {
+            PegawaiModel pegawaiModel = new PegawaiModel();
+            pegawaiModel.setNama(this.nama.getText());
+            pegawaiModel.setNip(this.nip.getText());
+            ServiceResult<Boolean> serviceResult = this.pegawaiController.UpdatePegawai(pegawaiModel);
+
+            if (!serviceResult.isSuccess()) {
+                JOptionPane.showMessageDialog(null, serviceResult.getErrorDetail(), "Error Create Pegawai", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "Success Update Pegawai nip : " + this.nip.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            setInitData();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

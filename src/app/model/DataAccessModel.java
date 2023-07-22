@@ -39,6 +39,10 @@ public abstract class DataAccessModel<T> {
         return new SQLExecuteResult();
     }
 
+    protected SQLExecuteResult<Boolean> deleteByUuidString(String id) {
+        return new SQLExecuteResult();
+    }
+
     protected SQLExecuteResult<T> findByUuid(UUID id) {
         return new SQLExecuteResult();
     }

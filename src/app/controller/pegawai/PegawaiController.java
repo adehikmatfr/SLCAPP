@@ -53,4 +53,15 @@ public class PegawaiController implements Pegawai {
         return serviceResult;
     }
 
+    @Override
+    public ServiceResult<Boolean> UpdatePegawai(PegawaiModel pegawaiModel) {
+        ServiceResult serviceResult = this.validatePegawaiModel(pegawaiModel);
+
+        if (serviceResult.isSuccess()) {
+            SQLExecuteResult<Boolean> sqlExecuteResult = this.pegawaiDataAccessObject.UpdatePegawai(pegawaiModel);
+            return new ServiceResult(sqlExecuteResult);
+        }
+
+        return serviceResult;
+    }
 }

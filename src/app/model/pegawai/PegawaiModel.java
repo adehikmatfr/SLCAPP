@@ -16,18 +16,18 @@ public class PegawaiModel {
     public PegawaiModel() {
     }
 
-    private UUID nip;
+    private String nip;
     private String nama;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;
     private Integer totalBalance;
 
-    public UUID getNip() {
+    public String getNip() {
         return nip;
     }
 
-    public void setNip(UUID nip) {
+    public void setNip(String nip) {
         this.nip = nip;
     }
 
