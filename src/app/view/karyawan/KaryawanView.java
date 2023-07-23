@@ -371,6 +371,7 @@ public class KaryawanView extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         clearDataInput();
+        buttonCreateEnabled();
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
