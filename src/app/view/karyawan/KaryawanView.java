@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import storage.SQLStorage;
 
@@ -53,6 +54,12 @@ public class KaryawanView extends javax.swing.JFrame {
         this.jButton2.setEnabled(true);
         this.jButton3.setEnabled(false);
         this.jButton4.setEnabled(false);
+    }
+
+    private void buttonUpdateEnabled() {
+        this.jButton2.setEnabled(false);
+        this.jButton3.setEnabled(true);
+        this.jButton4.setEnabled(true);
     }
 
     public void viewData(String keyword) {
@@ -179,6 +186,11 @@ public class KaryawanView extends javax.swing.JFrame {
                 jButton4MouseClicked(evt);
             }
         });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setText("Reset");
@@ -211,6 +223,11 @@ public class KaryawanView extends javax.swing.JFrame {
             }
         ));
         jTable1.setShowGrid(true);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -333,6 +350,7 @@ public class KaryawanView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Success Update Pegawai nip : " + this.nip.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
 
             setInitData();
+            buttonCreateEnabled();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -354,6 +372,38 @@ public class KaryawanView extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearDataInput();
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        String nipSelected=source.getModel().getValueAt(row, 0)+"";
+        String nameSelected=source.getModel().getValueAt(row, 1)+"";
+        
+        nip.setText(nipSelected);
+        nama.setText(nameSelected);
+        buttonUpdateEnabled();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        if (this.validateInput()) {
+            PegawaiModel pegawaiModel = new PegawaiModel();
+            pegawaiModel.setNama(this.nama.getText());
+            pegawaiModel.setNip(this.nip.getText());
+            ServiceResult<Boolean> serviceResult = this.pegawaiController.DeletePegawai(pegawaiModel);
+
+            if (!serviceResult.isSuccess()) {
+                JOptionPane.showMessageDialog(null, serviceResult.getErrorDetail(), "Error Delete Pegawai", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "Success Delete Pegawai nip : " + this.nip.getText(), "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            setInitData();
+            buttonCreateEnabled();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
