@@ -13,13 +13,15 @@ To get started with this project, follow the steps below:
 
 2. Open the project in your preferred Java Integrated Development Environment (IDE).
 
-3. Build the project to ensure all dependencies are resolved.
+3. Extract file libraries.zip for all libraries, and add it.
 
-4. copy file config.yaml.example to config.yaml and edit your db config.
+4. Build the project to ensure all dependencies are resolved.
 
-5. export dump db.
+5. copy file config.yaml.example to config.yaml and edit your db config.
 
-6. Run the main class `Main.java` to launch the Swing application.
+6. export dump db. at src\config\file\dump-alpro_koprasi2-202307251442.sql
+
+7. Run the main class `Main.java` to launch the Swing application.
 
 Notes: edit password from string hash in console after runing app becouse we use bycript and salt must be in accordance with the laptop that we run. 
 
