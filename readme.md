@@ -15,7 +15,13 @@ To get started with this project, follow the steps below:
 
 3. Build the project to ensure all dependencies are resolved.
 
-4. Run the main class `Main.java` to launch the Swing application.
+4. copy file config.yaml.example to config.yaml and edit your db config.
+
+5. export dump db.
+
+6. Run the main class `Main.java` to launch the Swing application.
+
+Notes: edit password from string hash in console after runing app becouse we use bycript and salt must be in accordance with the laptop that we run. 
 
 ## Project Structure
 Here we use Clean code architecture and also MVC pattren to build the program.
